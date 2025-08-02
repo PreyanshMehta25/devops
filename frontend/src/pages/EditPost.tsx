@@ -50,7 +50,7 @@ const EditPost: React.FC = () => {
 
   const fetchPost = async () => {
     try {
-      const response = await fetch(`http://localhost:5001/api/questions/${slug}`);
+      const response = await fetch(`https://stackit-mgsi.onrender.com/api/questions/${slug}`);
       
       if (!response.ok) {
         throw new Error('Question not found');
@@ -127,7 +127,7 @@ const EditPost: React.FC = () => {
         form.append('image', imageFile);
       }
 
-      const response = await fetch(`http://localhost:5001/api/questions/${slug}`, {
+      const response = await fetch(`https://stackit-mgsi.onrender.com/api/questions/${slug}`, {
         method: 'PUT',
         body: form
       });

@@ -71,7 +71,7 @@ const CreatePost: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5001/api/questions', {
+      const response = await fetch('https://stackit-mgsi.onrender.com/api/questions', {
         method: 'POST',
         body: form
       });

@@ -24,7 +24,7 @@ const AdminDashboard: React.FC = () => {
 
   const fetchAdminPosts = async () => {
     try {
-      const response = await fetch('https://internship-zm4p.onrender.com/api/posts/admin');
+      const response = await fetch('https://stackit-mgsi.onrender.com/api/posts/admin');
       const data = await response.json();
       setPosts(data);
     } catch (error) {
@@ -38,7 +38,7 @@ const AdminDashboard: React.FC = () => {
     if (!confirm('Are you sure you want to delete this post?')) return;
 
     try {
-      const response = await fetch(`https://internship-zm4p.onrender.com/api/posts/${slug}`, {
+      const response = await fetch(`https://stackit-mgsi.onrender.com/api/posts/${slug}`, {
         method: 'DELETE',
       });
 

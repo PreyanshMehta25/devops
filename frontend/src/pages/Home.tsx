@@ -72,7 +72,7 @@ const Home: React.FC = () => {
     if (userProfiles.has(clerkUserId)) return userProfiles.get(clerkUserId);
     
     try {
-      const res = await fetch(`http://localhost:5001/api/users/${clerkUserId}`);
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/users/${clerkUserId}`);
       if (res.ok) {
         const profile = await res.json();
         setUserProfiles(prev => new Map(prev).set(clerkUserId, profile));
@@ -121,7 +121,7 @@ const Home: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5001/api/questions?page=${page}&limit=10&sortBy=${sortBy}`);
+      const response = await fetch(`https://stackit-mgsi.onrender.com/api/questions?page=${page}&limit=10&sortBy=${sortBy}`);
       if (!response.ok) {
         throw new Error('Failed to fetch questions');
       }
@@ -137,7 +137,7 @@ const Home: React.FC = () => {
       const counts: {[key:string]:number} = {};
       await Promise.all(data.posts.map(async (q: any) => {
         try {
-          const res = await fetch(`http://localhost:5001/api/answers/question/${q._id}`);
+          const res = await fetch(`https://stackit-mgsi.onrender.com/api/answers/question/${q._id}`);
           if (res.ok) {
             const answers = await res.json();
             counts[q._id] = answers.length;
@@ -171,7 +171,7 @@ const Home: React.FC = () => {
     setVotingStates(prev => ({ ...prev, [questionId]: true }));
 
     try {
-      const response = await fetch(`http://localhost:5001/api/questions/${questionId}/vote`, {
+      const response = await fetch(`https://stackit-mgsi.onrender.com/api/questions/${questionId}/vote`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
     setNotifLoading(true);
     setNotifError(null);
     try {
-      const res = await fetch(`http://localhost:5001/api/notifications?clerkUserId=${user.id}`);
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/notifications?clerkUserId=${user.id}`);
       if (!res.ok) throw new Error('Failed to fetch notifications');
       const data = await res.json();
       setNotifications(data.notifications || []);
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
   const handleMarkAllRead = async () => {
   if (!user?.id) return;
   try {
-    await fetch('http://localhost:5001/api/notifications/mark-read', {
+    await fetch('https://stackit-mgsi.onrender.com/api/notifications/mark-read', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ clerkUserId: user.id }),

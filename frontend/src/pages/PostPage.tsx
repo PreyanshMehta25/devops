@@ -101,7 +101,7 @@ const PostPage: React.FC = () => {
     if (userProfiles.has(clerkUserId)) return userProfiles.get(clerkUserId);
     
     try {
-      const res = await fetch(`http://localhost:5001/api/users/${clerkUserId}`);
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/users/${clerkUserId}`);
       if (res.ok) {
         const profile = await res.json();
         setUserProfiles(prev => new Map(prev).set(clerkUserId, profile));
@@ -135,7 +135,7 @@ const PostPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://localhost:5001/api/questions/${slug}`);
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/questions/${slug}`);
       if (!res.ok) throw new Error('Question not found');
       const data = await res.json();
       setQuestion(data);
@@ -152,7 +152,7 @@ const PostPage: React.FC = () => {
   const fetchAnswers = async (questionId: string) => {
     setAnswerLoading(true);
     try {
-      const res = await fetch(`http://localhost:5001/api/answers/question/${questionId}`);
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/answers/question/${questionId}`);
       if (!res.ok) throw new Error('Failed to fetch answers');
       const data = await res.json();
       
@@ -198,7 +198,7 @@ const PostPage: React.FC = () => {
     try {
       const content = `${question.content} ${answers.map(a => a.content).join(' ')}`;
       
-      const response = await fetch('http://localhost:5001/api/summarize', {
+      const response = await fetch('https://stackit-mgsi.onrender.com/api/summarize', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -250,7 +250,7 @@ const PostPage: React.FC = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:5001/api/questions/${question?._id}/vote`, {
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/questions/${question?._id}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -273,7 +273,7 @@ const PostPage: React.FC = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:5001/api/answers/${answerId}/vote`, {
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/answers/${answerId}/vote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -301,7 +301,7 @@ const PostPage: React.FC = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:5001/api/answers/${answerId}/accept`, {
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/answers/${answerId}/accept`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ clerkUserId: user.id }),
@@ -323,7 +323,7 @@ const PostPage: React.FC = () => {
     if (!replyContent.trim()) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/answers/${answerId}/reply`, {
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/answers/${answerId}/reply`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -352,7 +352,7 @@ const PostPage: React.FC = () => {
     if (!editContent.trim()) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/answers/${answerId}`, {
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/answers/${answerId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: editContent }),
@@ -376,7 +376,7 @@ const PostPage: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this answer?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5001/api/answers/${answerId}`, {
+      const res = await fetch(`https://stackit-mgsi.onrender.com/api/answers/${answerId}`, {
         method: 'DELETE',
       });
       if (!res.ok) throw new Error('Delete failed');
@@ -398,7 +398,7 @@ const PostPage: React.FC = () => {
 
     setAnswerLoading(true);
     try {
-      const res = await fetch('http://localhost:5001/api/answers', {
+      const res = await fetch('https://stackit-mgsi.onrender.com/api/answers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

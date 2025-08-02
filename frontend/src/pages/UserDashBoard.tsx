@@ -38,7 +38,7 @@ const UserDashboard: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:5001/api/questions/user', {
+      const response = await fetch('https://stackit-mgsi.onrender.com/api/questions/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const UserDashboard: React.FC = () => {
     if (!confirm('Are you sure you want to delete this question? This action cannot be undone.')) return;
 
     try {
-      const response = await fetch(`http://localhost:5001/api/questions/${slug}`, {
+      const response = await fetch(`https://stackit-mgsi.onrender.com/api/questions/${slug}`, {
         method: 'DELETE',
       });
 
