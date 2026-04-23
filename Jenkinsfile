@@ -49,8 +49,9 @@ pipeline {
     stage("Deploy") {
       steps {
         sh """
+          docker-compose -f docker-compose.yml down --remove-orphans || true
           docker-compose -f docker-compose.yml pull
-          docker-compose -f docker-compose.yml up -d
+          docker-compose -f docker-compose.yml up -d --force-recreate
         """
       }
     }
