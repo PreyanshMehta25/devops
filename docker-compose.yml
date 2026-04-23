@@ -8,8 +8,7 @@ services:
       - mongo_data:/data/db
 
   backend:
-    build:
-      context: ./backend
+    image: preyanshmehta25/stackit-backend:latest
     container_name: stackit-backend
     env_file:
       - ./backend/.env
@@ -21,10 +20,7 @@ services:
       - mongo
 
   frontend:
-    build:
-      context: ./frontend
-      args:
-        - VITE_API_BASE_URL=http://localhost:5001
+    image: preyanshmehta25/stackit-frontend:latest
     container_name: stackit-frontend
     ports:
       - "5174:80"
