@@ -13,6 +13,7 @@ import Notification from './models/notification.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const isMain = process.argv[1] === __filename;
 dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
@@ -137,11 +138,13 @@ app.get('/:clerkUserId', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Server accessible at http://localhost:${PORT}`);
-  connectDB();
-});
+if (isMain) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Server accessible at http://localhost:${PORT}`);
+    connectDB();
+  });
+}
 
 const connectDB = async () => {
   try {
