@@ -57,6 +57,7 @@ pipeline {
     stage("Deploy") {
       steps {
         sh """
+          docker rm -f stackit-mongo stackit-backend stackit-frontend || true
           docker-compose -f docker-compose.yml down --remove-orphans || true
           docker-compose -f docker-compose.yml pull
           docker-compose -f docker-compose.yml up -d --force-recreate
