@@ -2,10 +2,12 @@
 
 A beautiful, modern, and feature-rich Q&A platform for programming questions, built with React, TypeScript, and Node.js.
 
+Note: CI/CD uses Jenkins with SonarQube quality analysis.
+
 ## ✨ Features
 
 ### 🎨 Modern UI/UX
-- Colorful and vibrant gradient theme
+- Colorful and vibrant gradient thematic UI
 - Responsive design for desktop, tablet, and mobile
 - Smooth animations and hover effects
 - Glass morphism UI components
