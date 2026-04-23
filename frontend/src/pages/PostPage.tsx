@@ -729,7 +729,7 @@ const PostPage: React.FC = () => {
         </div>
 
         {/* AI Summary Section */}
-        <div className="mb-6">
+        {/*<div className="mb-6">
           <div className="bg-white border border-gray-100 p-4">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -767,7 +767,7 @@ const PostPage: React.FC = () => {
               )}
             </AnimatePresence>
           </div>
-        </div>
+        </div> */}
 
         {/* Answer Form - Moved Before Answers */}
         {isSignedIn && (

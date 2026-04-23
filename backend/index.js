@@ -2,19 +2,24 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import quetionsRoutes from './routes/questions.js';
 import answerRoutes from './routes/answers.js';
+import paymentRoutes from './routes/payments.js';
 import axios from 'axios';
 import { ClerkExpressWithAuth, clerkClient } from '@clerk/clerk-sdk-node';
 import Notification from './models/notification.js';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || '*',
+  origin: 'process.env.CLIENT_ORIGIN || ' * '',
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -24,14 +29,33 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running', message: 'OK' });
 });
 
+const createFallbackSummary = (content) => {
+  const normalized = String(content || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!normalized) {
+    return 'No summary available.';
+  }
+
+  const sentences = normalized.match(/[^.!?]+[.!?]+/g) || [normalized];
+  const summary = sentences.slice(0, 3).join(' ').trim();
+  return summary.length > 400 ? `${summary.slice(0, 397).trim()}...` : summary;
+};
+
 app.use('/api/questions', quetionsRoutes);
 app.use('/api/answers', answerRoutes);
+app.use('/api/payments', paymentRoutes);
 
 app.post('/api/summarize', async (req, res) => {
   try {
     const { content } = req.body;
     if (!content) {
       return res.status(400).json({ error: 'Content is required.' });
+    }
+
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(500).json({ error: 'GEMINI_API_KEY is missing on the server.' });
     }
 
     const response = await axios.post(
@@ -45,11 +69,21 @@ app.post('/api/summarize', async (req, res) => {
     res.json({ summary });
   } catch (err) {
     console.error('Error in /api/summarize:', err.response?.data || err.message);
-    let errorMessage = 'Failed to generate summary. Please try again later.';
-    if (err.response?.data?.error?.message.includes('safety')) {
-        errorMessage = 'Summary generation failed due to safety concerns with the content.';
+    const fallbackSummary = createFallbackSummary(req.body?.content);
+    const safetyMessage = err.response?.data?.error?.message;
+    if (typeof safetyMessage === 'string' && safetyMessage.toLowerCase().includes('safety')) {
+      return res.json({
+        summary: fallbackSummary,
+        fallback: true,
+        note: 'Gemini blocked the content, so a local summary was returned instead.',
+      });
     }
-    res.status(500).json({ error: errorMessage });
+
+    res.json({
+      summary: fallbackSummary,
+      fallback: true,
+      note: 'AI summary service was unavailable, so a local summary was returned instead.',
+    });
   }
 });
 

@@ -1,0 +1,43 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: stackit-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+    container_name: stackit-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/StackIt
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+    command: ["npx", "nodemon", "index.js"]
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    image: node:20-alpine
+    container_name: stackit-frontend
+    working_dir: /app
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5174:5174"
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5174"]
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
