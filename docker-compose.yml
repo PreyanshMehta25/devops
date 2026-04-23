@@ -15,7 +15,7 @@ services:
     environment:
       - MONGODB_URI=mongodb://mongo:27017/StackIt
     ports:
-      - "5001:5001"
+      - "5002:5001"
     depends_on:
       - mongo
 

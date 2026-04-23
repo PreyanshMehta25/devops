@@ -7,6 +7,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 ## ✨ Features
 
 ### 🎨 Modern UI/UX
+
 - Colorful and vibrant gradient thematic UI
 - Responsive design for desktop, tablet, and mobile
 - Smooth animations and hover effects
@@ -14,11 +15,13 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 - Custom scrollbars
 
 ### 🔐 Authentication & Authorization
+
 - Clerk Integration for secure login/signup
 - Role-based access control
 - Protected routes
 
 ### 📝 Question Management
+
 - Rich Text Editor using ReactQuill
 - Image Upload support
 - Tags system
@@ -26,6 +29,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 - SEO-friendly URLs
 
 ### 💬 Answer System
+
 - Voting system for questions and answers
 - Accept answers
 - Reply to answers
@@ -33,12 +37,14 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 - Real-time updates
 
 ### 🔍 Search & Filtering
+
 - Search by title, content, and tags
 - Filters: latest, oldest, unanswered
 - Pagination
 - Sorting options
 
 ### 📊 User Dashboard
+
 - Personal statistics
 - Manage posted questions
 - Activity tracking
@@ -48,6 +54,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 ## 🚀 Tech Stack
 
 ### Frontend
+
 - React 18 with TypeScript
 - Vite
 - Tailwind CSS
@@ -57,6 +64,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 - React Helmet
 
 ### Backend
+
 - Node.js
 - Express.js
 - MongoDB
@@ -66,6 +74,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 - DOMPurify
 
 ### Authentication
+
 - Clerk
 
 ---
@@ -73,6 +82,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 ## 🎯 API Endpoints
 
 ### Questions
+
 - GET /api/questions
 - GET /api/questions/:slug
 - POST /api/questions
@@ -82,6 +92,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 - POST /api/questions/user
 
 ### Answers
+
 - GET /api/answers/question/:questionId
 - GET /api/answers/:id
 - POST /api/answers
@@ -96,6 +107,7 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 ## 🎨 Design System
 
 ### Color Palette
+
 - Primary: Purple gradients
 - Secondary: Blue gradients
 - Success: Green gradients
@@ -103,11 +115,13 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 - Error: Red gradients
 
 ### Typography
+
 - Inter Font
 - Bold headings
 - Readable body text
 
 ### Components
+
 - Cards
 - Buttons
 - Forms
@@ -124,3 +138,4 @@ Note: CI/CD uses Jenkins with SonarQube quality analysis.
 cd backend
 npm install
 npm start
+```
