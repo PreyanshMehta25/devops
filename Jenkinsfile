@@ -21,6 +21,14 @@ pipeline {
       }
     }
 
+    stage("SonarQube") {
+      steps {
+        withSonarQubeEnv("sonarqube") {
+          sh "sonar-scanner"
+        }
+      }
+    }
+
     stage("Build Images") {
       steps {
         sh """
