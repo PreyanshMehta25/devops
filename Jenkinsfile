@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  options {
+    skipDefaultCheckout(true)
+  }
+
   environment {
     DOCKERHUB_USER = "preyanshmehta25"
     BACKEND_IMAGE = "${DOCKERHUB_USER}/stackit-backend"
@@ -12,6 +16,7 @@ pipeline {
   stages {
     stage("Checkout") {
       steps {
+        deleteDir()
         checkout scm
       }
     }
@@ -51,9 +56,4 @@ pipeline {
     }
   }
 
-  post {
-    always {
-      sh "docker logout || true"
-    }
-  }
 }
