@@ -3,6 +3,7 @@
 A beautiful, modern, and feature-rich Q&A platform for programming questions, built with React, TypeScript, and Node.js.
 
 Note: CI/CD uses Jenkins with SonarQube quality analysis.
+Note: Minor documentation touch to trigger CI when needed.
 
 ## ✨ Features
 
